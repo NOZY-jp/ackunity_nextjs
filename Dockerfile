@@ -4,17 +4,20 @@ FROM node:20-alpine
 # コンテナ内での作業ディレクトリを /app に設定
 WORKDIR /app
 
-# まず package.json だけをコピーする
-# (理由: ソースコードを変えるたびに npm install が走ると遅いので、
-#  依存関係が変わったときだけインストールするようにキャッシュを利用するため)
-COPY package*.json ./
+RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+RUN pnpm config set store-dir /app/.pnpm-store
+
+COPY package.json pnpm-lock.yaml* ./
 
 # 依存関係をインストール
-RUN npm install
+RUN pnpm install
 
 # 残りのソースコードを全てコピー
 COPY . .
 
-# 開発サーバーを起動 (npm run dev)
+# 開発サーバーを起動 (pnpm run dev)
 # Next.jsはデフォルトで3000番ポートで動きます
-CMD ["npm", "run", "dev"]
+CMD ["pnpm", "run", "dev"]

@@ -1,0 +1,86 @@
+@import "../../variables";
+
+.sideList {
+  width: 72px;
+  background-color: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+  gap: 8px;
+  overflow-y: auto;
+
+  // スクロールバーを隠す
+  &::-webkit-scrollbar { display: none; }
+}
+
+.iconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+
+  // 左側の白いインジケーター（アクティブ時）
+  .indicator {
+    position: absolute;
+    left: -12px;
+    width: 4px;
+    height: 8px;
+    background-color: var(--text-main);
+    border-radius: 0 4px 4px 0;
+    transition: height 0.2s;
+    opacity: 0;
+  }
+
+  &:hover .indicator {
+    opacity: 1;
+    height: 20px;
+  }
+
+  &.active .indicator {
+    opacity: 1;
+    height: 40px;
+  }
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-radius 0.2s, background-color 0.2s;
+  font-weight: bold;
+  font-size: 0.9rem;
+  overflow: hidden;
+
+  &:hover {
+    border-radius: 16px;
+    background-color: var(--color-info);
+  }
+}
+
+.separator {
+  width: 32px;
+  height: 2px;
+  background-color: var(--card-border);
+  margin: 4px 0;
+}
+
+// スケルトンアニメーション
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-surface) 25%, var(--card-border) 50%, var(--bg-surface) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

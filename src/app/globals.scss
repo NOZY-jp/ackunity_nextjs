@@ -1,0 +1,27 @@
+@import "variables";
+
+:root {
+  /* Default: Dark Theme */
+  --bg-base: #1e1f22;
+  --bg-surface: #2b2d31;
+  --bg-sidebar: #111214;
+  --text-main: #dbdee1;
+  --text-muted: #949ba4;
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme='light'] {
+  --bg-base: #f2f3f5;
+  --bg-surface: #ffffff;
+  --bg-sidebar: #e3e5e8;
+  --text-main: #060607;
+  --text-muted: #4e5058;
+  --card-border: rgba(0, 0, 0, 0.08);
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}

@@ -1,0 +1,58 @@
+@import "../../variables";
+
+.header {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: var(--bg-base);
+  border-bottom: 1px solid var(--card-border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .logo {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: 0.5px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 12px;
+
+    .loginBtn {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      padding: 4px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: var(--hover-bg);
+      }
+    }
+  }
+
+  // 仮置き（スケルトン）用のスタイル
+  &.loading {
+    .logo, .loginBtn {
+      background: linear-gradient(90deg, var(--bg-surface) 25%, var(--card-border) 50%, var(--bg-surface) 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      color: transparent;
+      border: none;
+    }
+  }
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
