@@ -1,62 +1,46 @@
 "use client";
 
+import { FiPlus, FiSettings } from "react-icons/fi";
 import styles from "./SideList.module.scss";
 
 interface Organization {
   id: string;
   name: string;
-  image?: string;
 }
 
 interface SideListProps {
   organizations: Organization[];
   activeId?: string;
-  isLoading?: boolean;
 }
 
-export default function SideList({
-  organizations,
-  activeId,
-  isLoading,
-}: SideListProps) {
+export default function SideList({ organizations, activeId }: SideListProps) {
   return (
     <aside className={styles.sideList}>
-      {/* ホームボタン（固定） */}
-      <div className={styles.iconWrapper}>
-        <div className={styles.indicator} />
-        <div className={styles.icon} style={{ backgroundColor: "#5865f2" }}>
-          A
-        </div>
-      </div>
+      {/* Home / Aggregated Feed */}
+      <div className={styles.homeIcon}>A</div>
 
       <div className={styles.separator} />
 
-      {/* 団体リスト */}
-      {isLoading
-        ? // ローディング中のスケルトン
-        [1, 2, 3].map((i) => (
-          <div key={i} className={`${styles.icon} styles.skeleton`} />
-        ))
-        : organizations.map((org) => (
+      {/* Organization Icons */}
+      <div className={styles.orgList}>
+        {organizations.map((org) => (
           <div
             key={org.id}
-            className={`${styles.iconWrapper} ${org.id === activeId ? styles.active : ""}`}
+            className={`${styles.orgIcon} ${org.id === activeId ? styles.active : ""}`}
+            title={org.name}
           >
-            <div className={styles.indicator} />
-            <div className={styles.icon}>
-              {org.image ? (
-                <img src={org.image} alt={org.name} />
-              ) : (
-                org.name.substring(0, 2)
-              )}
-            </div>
+            {org.name.substring(0, 2)}
           </div>
         ))}
+      </div>
 
-      {/* 追加ボタン */}
-      <div className={styles.iconWrapper}>
-        <div className={styles.icon} style={{ color: "#23a559" }}>
-          ＋
+      {/* Bottom Actions */}
+      <div className={styles.bottomActions}>
+        <div className={styles.actionBtn} title="団体を追加">
+          <FiPlus />
+        </div>
+        <div className={styles.actionBtn} title="設定">
+          <FiSettings />
         </div>
       </div>
     </aside>

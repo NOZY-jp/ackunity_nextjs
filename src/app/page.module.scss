@@ -4,17 +4,40 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden;
 }
 
-.contentWrapper {
+.mainWrapper {
   display: flex;
   flex: 1;
+  width: 100%;
   overflow: hidden;
 }
 
-.mainContent {
+.sideList {
+  width: $sidebar-width;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.feed {
   flex: 1;
   overflow-y: auto;
-  background-color: var(--bg-base);
+  overflow-x: hidden;
+  padding: 40px 60px;
+  display: flex;
+  justify-content: center;
+  scrollbar-gutter: stable;
+}
+
+.poolContainer {
+  width: 100%;
+  max-width: 800px;
+}
+
+.detailPane {
+  width: $detail-width;
+  background-color: var(--bg-app);
+  border-left: 1px solid var(--border-subtle);
+  overflow-y: auto;
 }

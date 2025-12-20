@@ -2,85 +2,113 @@
 
 .sideList {
   width: 72px;
+  min-width: 72px;
   background-color: var(--bg-sidebar);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 12px 0;
-  gap: 8px;
-  overflow-y: auto;
-
-  // スクロールバーを隠す
-  &::-webkit-scrollbar { display: none; }
-}
-
-.iconWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  cursor: pointer;
-
-  // 左側の白いインジケーター（アクティブ時）
-  .indicator {
-    position: absolute;
-    left: -12px;
-    width: 4px;
-    height: 8px;
-    background-color: var(--text-main);
-    border-radius: 0 4px 4px 0;
-    transition: height 0.2s;
-    opacity: 0;
-  }
-
-  &:hover .indicator {
-    opacity: 1;
-    height: 20px;
-  }
-
-  &.active .indicator {
-    opacity: 1;
-    height: 40px;
-  }
-}
-
-.icon {
-  width: 48px;
-  height: 48px;
-  background-color: var(--bg-surface);
-  color: var(--text-main);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-radius 0.2s, background-color 0.2s;
-  font-weight: bold;
-  font-size: 0.9rem;
+  height: 100%;
+  border-right: 1px solid var(--border-subtle);
   overflow: hidden;
 
+  &::-webkit-scrollbar { display: none; }
+  scrollbar-width: none;
+}
+
+// 共通アイコンスタイル
+.iconBase {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+// ホームアイコン (Squircle形状 + Blue)
+.homeIcon {
+  @extend .iconBase;
+  background-color: var(--color-primary); // #6366f1
+  color: white;
+  border-radius: 16px; // Squircleに近い角丸
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  margin-bottom: 12px;
+
   &:hover {
-    border-radius: 16px;
-    background-color: var(--color-info);
+    border-radius: 12px;
+    transform: translateY(-2px);
   }
 }
 
+// 区切り線
 .separator {
   width: 32px;
-  height: 2px;
-  background-color: var(--card-border);
-  margin: 4px 0;
+  height: 1px;
+  background-color: var(--border-subtle);
+  margin-bottom: 12px;
 }
 
-// スケルトンアニメーション
-.skeleton {
-  background: linear-gradient(90deg, var(--bg-surface) 25%, var(--card-border) 50%, var(--bg-surface) 75%);
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
+// 団体リストのスクロールエリア
+.orgList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  width: 100%;
+
+  &::-webkit-scrollbar { display: none; }
+  scrollbar-width: none;
 }
 
-@keyframes skeleton-loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+// 団体アイコン (Circle + Dark)
+.orgIcon {
+  @extend .iconBase;
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+
+  &:hover, &.active {
+    border-radius: 12px;
+    color: var(--text-main);
+    background-color: var(--border-subtle);
+    border-color: var(--text-muted);
+  }
+
+  &.active {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      left: -12px;
+      width: 4px;
+      height: 20px;
+      background-color: var(--text-main);
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+// ボトム固定エリア
+.bottomActions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  width: 100%;
+
+  .actionBtn {
+    @extend .orgIcon;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    border-style: dashed; // 追加ボタンは点線にしてもお洒落
+  }
 }

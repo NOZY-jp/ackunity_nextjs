@@ -1,9 +1,12 @@
-// Importance colors
-$color-critical: #f23f43; // 赤
-$color-warning:  #f0b232; // 黄
-$color-info:     #5865f2; // 青
+// Brand Colors
+$primary: #6366f1; // Lavender
+$primary-hover: #4f46e5;
+
+// Severity Colors 
+$critical: #ef4444; // Red
+$important: #f59e0b; // Yellow
+$info: #3b82f6;      // Blue
 
 // Layout
 $sidebar-width: 72px;
-$card-radius: 12px;
-$transition-speed: 0.2s;
+$detail-width: 320px;
