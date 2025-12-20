@@ -1,9 +1,13 @@
 @import "variables";
 
+$breakpoint-shrink: 1024px;
+$breakpoint-mid: 850px;
+
 .container {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  position: relative;
 }
 
 .mainWrapper {
@@ -11,7 +15,11 @@
   flex: 1;
   width: 100%;
   overflow: hidden;
+  position: relative;
 }
+
+
+/* SideList */
 
 .sideList {
   width: $sidebar-width;
@@ -20,14 +28,20 @@
   overflow: hidden;
 }
 
+
+/* Main Feed */
+
 .feed {
   flex: 1;
   overflow-y: auto;
-  overflow-x: hidden;
   padding: 40px 60px;
   display: flex;
   justify-content: center;
   scrollbar-gutter: stable;
+
+  @media (max-width: $breakpoint-shrink) {
+    padding: 24px 16px;
+  }
 }
 
 .poolContainer {
@@ -35,9 +49,49 @@
   max-width: 800px;
 }
 
-.detailPane {
-  width: $detail-width;
-  background-color: var(--bg-app);
+/* --- Detail Pane (Responsive) --- */
+.detailPaneWrapper {
+  width: 400px;
   border-left: 1px solid var(--border-subtle);
-  overflow-y: auto;
+  background-color: var(--bg-app);
+  height: 100%;
+  
+  @media (max-width: $breakpoint-mid) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 85%;
+    max-width: 400px;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+    z-index: 50;
+    
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}
+
+/* --- Overlay Backdrop (Mobile Only) --- */
+.backdrop {
+  display: none;
+  
+  @media (max-width: $breakpoint-mid) {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    &.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
 }

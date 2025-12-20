@@ -1,14 +1,21 @@
 "use client";
 
-import { FiArchive, FiDownload, FiFileText, FiShare2 } from "react-icons/fi";
+import {
+  FiArchive,
+  FiArrowLeft,
+  FiDownload,
+  FiFileText,
+  FiShare2,
+} from "react-icons/fi";
 import type { Notification } from "@/app/types/notification";
 import styles from "./DetailPane.module.scss";
 
-export default function DetailPane({
-  notification,
-}: {
+interface DetailPaneProps {
   notification: Notification | null;
-}) {
+  onClose?: () => void;
+}
+
+export default function DetailPane({ notification, onClose }: DetailPaneProps) {
   if (!notification) {
     return (
       <aside className={styles.detailPane}>
@@ -25,6 +32,13 @@ export default function DetailPane({
 
   return (
     <aside className={styles.detailPane}>
+      {/* モバイル専用ヘッダー */}
+      <div className={styles.mobileHeader}>
+        <button className={styles.backButton} onClick={onClose}>
+          <FiArrowLeft /> 戻る
+        </button>
+      </div>
+
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.tags}>

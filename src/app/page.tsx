@@ -51,6 +51,10 @@ export default function Home() {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
+  const handleCloseDetail = () => {
+    setSelectedNote(null);
+  };
+
   return (
     <div className={styles.container}>
       <Header theme={theme} onThemeToggle={toggleTheme} />
@@ -67,13 +71,20 @@ export default function Home() {
           <NotificationPool
             notifications={notifications}
             isLoading={isLoading}
-            onSelectNote={(note) => setSelectedNote(note)}
+            onSelectNote={setSelectedNote}
             activeId={selectedNote?.id}
           />
         </main>
-        <aside className={styles.detailPane}>
-          <DetailPane notification={selectedNote} />
-        </aside>
+
+        <div
+          className={`${styles.backdrop} ${selectedNote ? styles.active : ""}`}
+          onClick={handleCloseDetail}
+        />
+        <div
+          className={`${styles.detailPaneWrapper} ${selectedNote ? styles.active : ""}`}
+        >
+          <DetailPane notification={selectedNote} onClose={handleCloseDetail} />
+        </div>
       </div>
     </div>
   );

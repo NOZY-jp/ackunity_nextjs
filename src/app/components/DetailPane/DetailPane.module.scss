@@ -1,15 +1,47 @@
 @import "../../variables";
 
+$breakpoint-mid: 850px;
+
 .detailPane {
-  width: 400px; // 画像に合わせて少し広めに
   background-color: var(--bg-app);
-  border-left: 1px solid var(--border-subtle);
+  // border-left: 1px solid var(--border-subtle);
   height: 100%;
   overflow-y: auto;
 }
 
+.mobileHeader {
+  display: none;
+  padding: 16px 24px 0;
+  
+  @media (max-width: $breakpoint-mid) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .backButton {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 8px 0;
+    
+    &:hover { color: var(--text-main); }
+    
+    svg { font-size: 1.2rem; }
+  }
+}
+
 .container {
   padding: 32px;
+  @media (max-width: $breakpoint-mid) {
+    padding-top: 16px; 
+  }
 }
 
 .title {

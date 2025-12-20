@@ -28,6 +28,10 @@ export default function Header({ theme, onThemeToggle }: HeaderProps) {
 
       {/* 右: アクション */}
       <div className={styles.rightSection}>
+        {/* モバイル用検索アイコン */}
+        <button className={styles.mobileSearchIcon}>
+          <FiSearch />
+        </button>
         <button className={styles.themeToggle} onClick={onThemeToggle}>
           {theme === "dark" ? <FiMoon /> : <FiSun />}
         </button>
